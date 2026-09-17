@@ -14,6 +14,7 @@ CASCADE_PATH = os.path.join(
 face_classifier = cv2.CascadeClassifier(CASCADE_PATH)
 
 
+
 @app.route("/")
 def serve_index():
     return send_from_directory(app.static_folder, "index.html")
@@ -73,3 +74,8 @@ def detect_faces():
 
 # Requerido para Vercel Serverless
 app.debug = False
+
+# Solo se ejecuta al correr localmente (python index.py)
+# En Vercel, este bloque se ignora porque Vercel importa "app" directamente
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
